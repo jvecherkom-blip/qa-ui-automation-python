@@ -1,5 +1,5 @@
 import pytest
-from api.posts_api import create_post
+#from posts_api.py import create_post
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -12,8 +12,8 @@ def post_payload():
         "userId": 1
     }
 
-@pytest.fixture
-def created_post(post_payload):
+#@pytest.fixture
+#def created_post(post_payload):
     response = create_post(post_payload)
     return response
 

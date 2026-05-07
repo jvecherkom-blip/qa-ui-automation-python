@@ -1,5 +1,4 @@
-from api.posts_api import create_post
-
+from .api.posts_api import create_post
 
 def test_create_post_with_parametrized_fixture(post_payload):
     response = create_post(post_payload)
@@ -9,3 +8,4 @@ def test_create_post_with_parametrized_fixture(post_payload):
     assert response_json["title"] == post_payload["title"]
     assert response_json["body"] == post_payload["body"]
     assert response_json["userId"] == post_payload["userId"]
+

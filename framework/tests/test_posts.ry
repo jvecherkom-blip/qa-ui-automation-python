@@ -1,0 +1,23 @@
+from framework.api.services.posts_service import PostsService
+
+
+def test_get_posts():
+    service = PostsService()
+    response = service.get_posts()
+
+    assert isinstance(response, list)
+
+
+def test_create_post():
+    service = PostsService()
+
+    data = {
+        "title": "test",
+        "body": "test body",
+        "userId": 1
+    }
+
+    response = service.create_post(data)
+
+    assert response.status_code == 201
+    assert response.json()["title"] == "test"
