@@ -21,3 +21,8 @@ class BookingClient:
     def delete_booking(self, booking_id, token):
         headers = {"Cookie": f"token={token}"}
         return requests.delete(f"{BASE_URL}/booking/{booking_id}", headers=headers)
+    
+    def get_auth_headers(self, token):
+        return {
+        "Cookie": f"token={token}"
+    }

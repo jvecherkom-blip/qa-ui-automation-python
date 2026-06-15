@@ -1,5 +1,8 @@
 import requests
 from framework.config.config import BASE_URL
+import logging
+
+logger = logging.getLogger(__name__)
 
 class BaseClient:
 
@@ -7,7 +10,10 @@ class BaseClient:
         self.base_url = base_url
 
     def get(self, endpoint):
-        return requests.get(f"{self.base_url}{endpoint}")
+        logger.info(f"GET request to {self.base_url}{endpoint}")
+        response = requests.get(f"{self.base_url}{endpoint}")
+        logger.info(f"Response status: {response.status_code}")
+        return response
 
     def post(self, endpoint, data=None, headers=None):
         return requests.post(

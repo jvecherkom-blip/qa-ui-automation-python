@@ -105,10 +105,42 @@ def test_get_nonexistent_booking():
 
     assert response.status_code == 404
 
-def test_update_without_token():
+def test_update_token_wrong():
     response = client.update_booking(1, {}, token="wrong")
 
     assert response.status_code in [403, 401]
+
+def test_update_booking_without_token(created_booking):
+    booking_id = created_booking["bookingid"]
+
+    updated_data = {
+        "firstname": "NoAuth",
+        "lastname": "User"
+    }
+
+    response = client.update_booking(
+        booking_id,
+        updated_data,
+        token=""
+    )
+
+    assert response.status_code == 403
+
+def test_update_booking_with_invalid_token(created_booking):
+    booking_id = created_booking["bookingid"]
+
+    updated_data = {
+        "firstname": "Invalid",
+        "lastname": "Token"
+    }
+
+    response = client.update_booking(
+        booking_id,
+        updated_data,
+        token="wrongtoken"
+    )
+
+    assert response.status_code == 403
 
 
 @pytest.mark.parametrize(
